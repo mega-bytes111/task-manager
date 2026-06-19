@@ -13,38 +13,71 @@ const { initSocket } = require("./src/socket/socketHandler");
 
 dotenv.config();
 
-// Global error handler (important for Render)
+// ✅ Handle unhandled promise rejections (important for Render)
 process.on("unhandledRejection", (err) => {
   console.error("Unhandled Rejection:", err.message);
 });
 
 const app = express();
 
-// Middleware
-app.use(cors());
+/* =========================
+   ✅ PRODUCTION CORS CONFIG
+========================= */
+
+const allowedOrigins = [
+  "https://task-manager-bkg3.onrender.com" // 👈 replace this
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // allow requests with no origin (like Postman, mobile apps)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+}));
+
 app.use(express.json());
 
-// Routes
+/* =========================
+   ✅ ROUTES
+========================= */
+
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
 
-// Basic Routes
+// ✅ Basic Health Route
 app.get("/", (req, res) => {
   res.send("Task Manager API Running ✅");
 });
 
+// ✅ Protected Test Route
 app.get("/api/protected", protect, (req, res) => {
-  res.json({ message: "Protected route accessed ✅", user: req.user });
+  res.json({
+    message: "Protected route accessed ✅",
+    user: req.user
+  });
 });
 
-// Database Connection (non-blocking)
+/* =========================
+   ✅ DATABASE CONNECTION
+========================= */
+
 connectDB().catch(err => {
   console.error("❌ Database connection failed:", err.message);
   console.log("⚠️ Server is running without DB connection");
 });
 
-// Create Server + Socket
+/* =========================
+   ✅ SERVER + SOCKET SETUP
+========================= */
+
 const server = http.createServer(app);
 initSocket(server);
 
