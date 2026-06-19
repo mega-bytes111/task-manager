@@ -3,8 +3,8 @@
 A modern full-stack task management and collaboration platform built with **React (Vite), Node.js, Express, MongoDB, and Socket.io**.
 
 🔗 Live Demo  
-Frontend: https://your-frontend-url.onrender.com  
-Backend API: https://your-backend-url.onrender.com  
+Frontend: (https://task-manager-bkg3.onrender.com) 
+Backend API: (https://task-manager-backend-fzv9.onrender.com)  
 
 ---
 
