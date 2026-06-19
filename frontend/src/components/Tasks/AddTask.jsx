@@ -1,7 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
-import BASE_URL from "../../services/api";
+import API from "../../api/axios";
 
 export default function AddTask({ onTaskAdded }) {
   const [title, setTitle] = useState("");
@@ -14,21 +13,27 @@ export default function AddTask({ onTaskAdded }) {
     e.preventDefault();
     setLoading(true);
     setMsg("");
+
     try {
-      await axios.post(
-        `${BASE_URL}/api/tasks`,
+      await API.post(
+        "/api/tasks",
         { title, description: desc },
         {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
+
       setMsg("Task added!");
       setTitle("");
       setDesc("");
       onTaskAdded && onTaskAdded();
+
     } catch (err) {
       setMsg("Failed to add task");
     }
+
     setLoading(false);
   };
 
@@ -53,7 +58,6 @@ export default function AddTask({ onTaskAdded }) {
         className="flex-1 min-w-[200px] max-w-2xl md:max-w-md h-12 md:h-11 px-4 py-2 rounded-lg bg-gray-800 text-white 
                   placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 text-base transition resize-none shadow"
         rows={2}
-        style={{ lineHeight: 1.4, fontSize: '1.15rem' }}
         required
       />
 
@@ -62,7 +66,7 @@ export default function AddTask({ onTaskAdded }) {
         disabled={loading}
         className="bg-gradient-to-tr from-green-500 to-emerald-400 hover:from-green-600 hover:to-green-500
                    text-white font-bold px-7 py-2 rounded-lg shadow-md text-base transition-all duration-150
-                   active:scale-98"
+                   active:scale-95"
       >
         {loading ? "Adding..." : "Add Task"}
       </button>

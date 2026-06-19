@@ -1,15 +1,27 @@
-import axios from "axios";
-import BASE_URL from "./api";
+import API from "../api/axios";
 
+// ✅ Get all notifications
 export const getNotifications = async (token) => {
-  const res = await axios.get(`${BASE_URL}/api/notifications`, {
-    headers: { Authorization: `Bearer ${token}` },
+  const { data } = await API.get("/api/notifications", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
-  return res.data;
+
+  return data;
 };
 
+// ✅ Mark notification as read
 export const markNotificationAsRead = async (id, token) => {
-  await axios.put(`${BASE_URL}/api/notifications/${id}/read`, {}, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const { data } = await API.put(
+    `/api/notifications/${id}/read`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  return data;
 };
