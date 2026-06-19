@@ -74,36 +74,44 @@ This application provides a secure, responsive, and real-time task management sy
 ---
 
 ## 📂 Project Structure
-task-manager/
-│
-├── backend/
-│ ├── routes/
-│ ├── middleware/
-│ ├── socket/
-│ └── server.js
-│
-├── frontend/
-│ ├── src/
-│ ├── api/
-│ ├── services/
-│ └── vite.config.js
 
-🚀 Deployment
-Frontend and Backend deployed using Render.
+    task-manager/
+    │
+    ├── backend/
+    │   ├── routes/
+    │   ├── middleware/
+    │   ├── socket/
+    │   └── server.js
+    │
+    ├── frontend/
+    │   ├── src/
+    │   ├── api/
+    │   ├── services/
+    │   └── vite.config.js
 
-Important:
+## 🚀 Deployment
 
-.Configure CORS properly
-.Add environment variables in Render dashboard
-.Allow MongoDB Atlas IP access (0.0.0.0/0)
+Frontend and Backend deployed using **Render**.
 
-📈 Future Improvements
-.Role-based access control
-.Team workspace system
-.Email notifications
-.File attachments
-.Task priority & deadlines
+### Important:
 
-👨‍💻 Author
-Arpan Tiwari
+- Configure CORS properly
+- Add environment variables in Render dashboard
+- Allow MongoDB Atlas IP access (`0.0.0.0/0`)
+
+---
+
+## 📈 Future Improvements
+
+- Role-based access control
+- Team workspace system
+- Email notifications
+- File attachments
+- Task priority & deadlines
+
+---
+
+## 👨‍💻 Author
+
+**Arpan Tiwari**  
 Full Stack Developer
